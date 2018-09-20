@@ -1,8 +1,11 @@
-from app import app
+from app import app, db
 from flask import render_template, request, url_for, jsonify
 import os
 import json
 
+@app.route("/api/regions", methods=["GET"])
+def regions():
+    return
 
 @app.route("/", methods=["GET"])
 def index():
