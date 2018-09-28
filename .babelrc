@@ -1,0 +1,5 @@
+{
+  "plugins": ["syntax-flow", "transform-flow-strip-types", "transform-object-rest-spread"],
+  "presets": ["env", "react"],
+  "ignore": ["node_modules"]
+}

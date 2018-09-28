@@ -1,0 +1,68 @@
+{
+  "name": "warmr",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "flask run",
+    "start": "node devserver",
+    "build": "./node_modules/.bin/parcel build src/index.js --out-file main.js --out-dir app/static",
+    "test": "./node_modules/.bin/jest --watch --env=jsdom"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CAYdenberg/warmr.git"
+  },
+  "keywords": [
+    "climate",
+    "change",
+    "predictions",
+    "datavis"
+  ],
+  "author": "@CAYdenberg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CAYdenberg/warmr/issues"
+  },
+  "homepage": "https://github.com/CAYdenberg/warmr#readme",
+  "engines": {
+    "node": ">=9.10.1",
+    "npm": ">=6.1.0"
+  },
+  "dependencies": {
+    "bulma": "^0.7.1",
+    "deep-freeze": "0.0.1",
+    "immutability-helper": "^2.7.1",
+    "popsicle": "^0.2.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-icons-kit": "^1.1.7"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.4.2",
+    "babel-plugin-syntax-flow": "^6.18.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^5.4.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-flowtype-errors": "^3.6.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "express": "^4.16.3",
+    "flow-bin": "^0.76.0",
+    "http-proxy-middleware": "^0.19.0",
+    "jest": "^23.5.0",
+    "node-sass": "^4.7.2",
+    "parcel-bundler": "^1.6.2",
+    "react-test-renderer": "^16.4.0"
+  }
+}

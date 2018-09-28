@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.js"],"names":["alert"],"mappings":";;;AAEK,aAFL,QAAA,cAEAA","file":"main.map","sourceRoot":"../../src","sourcesContent":["import './App.scss'\n\nalert()\n"]}
