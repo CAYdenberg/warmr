@@ -1,11 +1,20 @@
-from app import app, db
+from app import app, mongo
 from flask import render_template, request, url_for, jsonify
 import os
 import json
+from bson.json_util import dumps
 
 @app.route("/api/regions", methods=["GET"])
 def regions():
-    return
+    results = mongo.db.regions.find()
+    regions = []
+    for result in results:
+        print(result)
+        regions.append({
+            "years1965to2017": result['years1965to2017'],
+            "name": result['name']
+        })
+    return jsonify(regions)
 
 @app.route("/", methods=["GET"])
 def index():
