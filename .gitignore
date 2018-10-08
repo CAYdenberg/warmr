@@ -11,6 +11,7 @@ package-lock.json
 /server/static
 /.cache
 /v8-compile-cache*
+/app/static/*
 
 # misc
 .DS_Store

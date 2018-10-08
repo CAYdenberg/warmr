@@ -33,11 +33,12 @@
     "bulma": "^0.7.1",
     "deep-freeze": "0.0.1",
     "immutability-helper": "^2.7.1",
-    "popsicle": "^0.2.0",
+    "popsicle": "^10.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-icons-kit": "^1.1.7"
+    "react-icons-kit": "^1.1.7",
+    "react-vis": "^1.11.2"
   },
   "devDependencies": {
     "babel": "^6.23.0",

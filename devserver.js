@@ -3,9 +3,9 @@ const proxy = require('http-proxy-middleware')
 const Bundler = require('parcel-bundler')
 const express = require('express')
 
-spawn('python', ['-m', 'flask', 'run'])
+spawn('flask', ['run'])
 
-let bundler = new Bundler('app/js/index.js', {
+let bundler = new Bundler('src/index.js', {
   outFile: 'main.js',
   outDir: 'app/static',
   cache: false,
