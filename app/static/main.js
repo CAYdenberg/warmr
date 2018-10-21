@@ -62526,7 +62526,68 @@ var _axisUtils = _interopRequireDefault(require("./utils/axis-utils"));
 var _scalesUtils = _interopRequireDefault(require("./utils/scales-utils"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./plot/series/abstract-series":"../node_modules/react-vis/es/plot/series/abstract-series.js","./plot/series/line-series":"../node_modules/react-vis/es/plot/series/line-series.js","./plot/series/line-series-canvas":"../node_modules/react-vis/es/plot/series/line-series-canvas.js","./plot/series/horizontal-bar-series":"../node_modules/react-vis/es/plot/series/horizontal-bar-series.js","./plot/series/horizontal-bar-series-canvas":"../node_modules/react-vis/es/plot/series/horizontal-bar-series-canvas.js","./plot/series/vertical-bar-series":"../node_modules/react-vis/es/plot/series/vertical-bar-series.js","./plot/series/vertical-bar-series-canvas":"../node_modules/react-vis/es/plot/series/vertical-bar-series-canvas.js","./plot/series/vertical-rect-series":"../node_modules/react-vis/es/plot/series/vertical-rect-series.js","./plot/series/vertical-rect-series-canvas":"../node_modules/react-vis/es/plot/series/vertical-rect-series-canvas.js","./plot/series/horizontal-rect-series":"../node_modules/react-vis/es/plot/series/horizontal-rect-series.js","./plot/series/horizontal-rect-series-canvas":"../node_modules/react-vis/es/plot/series/horizontal-rect-series-canvas.js","./plot/series/label-series":"../node_modules/react-vis/es/plot/series/label-series.js","./plot/series/polygon-series":"../node_modules/react-vis/es/plot/series/polygon-series.js","./plot/series/rect-series":"../node_modules/react-vis/es/plot/series/rect-series.js","./plot/series/rect-series-canvas":"../node_modules/react-vis/es/plot/series/rect-series-canvas.js","./plot/series/mark-series":"../node_modules/react-vis/es/plot/series/mark-series.js","./plot/series/mark-series-canvas":"../node_modules/react-vis/es/plot/series/mark-series-canvas.js","./plot/series/whisker-series":"../node_modules/react-vis/es/plot/series/whisker-series.js","./plot/series/heatmap-series":"../node_modules/react-vis/es/plot/series/heatmap-series.js","./plot/series/hexbin-series":"../node_modules/react-vis/es/plot/series/hexbin-series.js","./plot/series/contour-series":"../node_modules/react-vis/es/plot/series/contour-series.js","./plot/series/custom-svg-series":"../node_modules/react-vis/es/plot/series/custom-svg-series.js","./plot/series/area-series":"../node_modules/react-vis/es/plot/series/area-series.js","./plot/series/arc-series":"../node_modules/react-vis/es/plot/series/arc-series.js","./plot/series/line-mark-series":"../node_modules/react-vis/es/plot/series/line-mark-series.js","./plot/series/line-mark-series-canvas":"../node_modules/react-vis/es/plot/series/line-mark-series-canvas.js","./plot/hint":"../node_modules/react-vis/es/plot/hint.js","./plot/borders":"../node_modules/react-vis/es/plot/borders.js","./plot/crosshair":"../node_modules/react-vis/es/plot/crosshair.js","./plot/xy-plot":"../node_modules/react-vis/es/plot/xy-plot.js","./plot/axis/decorative-axis":"../node_modules/react-vis/es/plot/axis/decorative-axis.js","./plot/axis/x-axis":"../node_modules/react-vis/es/plot/axis/x-axis.js","./plot/axis/y-axis":"../node_modules/react-vis/es/plot/axis/y-axis.js","./plot/circular-grid-lines":"../node_modules/react-vis/es/plot/circular-grid-lines.js","./plot/grid-lines":"../node_modules/react-vis/es/plot/grid-lines.js","./plot/gradient-defs":"../node_modules/react-vis/es/plot/gradient-defs.js","./plot/vertical-grid-lines":"../node_modules/react-vis/es/plot/vertical-grid-lines.js","./plot/horizontal-grid-lines":"../node_modules/react-vis/es/plot/horizontal-grid-lines.js","./plot/voronoi":"../node_modules/react-vis/es/plot/voronoi.js","./plot/highlight":"../node_modules/react-vis/es/plot/highlight.js","./legends/discrete-color-legend":"../node_modules/react-vis/es/legends/discrete-color-legend.js","./legends/searchable-discrete-color-legend":"../node_modules/react-vis/es/legends/searchable-discrete-color-legend.js","./legends/continuous-color-legend":"../node_modules/react-vis/es/legends/continuous-color-legend.js","./legends/continuous-size-legend":"../node_modules/react-vis/es/legends/continuous-size-legend.js","./treemap":"../node_modules/react-vis/es/treemap/index.js","./radial-chart":"../node_modules/react-vis/es/radial-chart/index.js","./radar-chart":"../node_modules/react-vis/es/radar-chart/index.js","./parallel-coordinates":"../node_modules/react-vis/es/parallel-coordinates/index.js","./sankey":"../node_modules/react-vis/es/sankey/index.js","./sunburst":"../node_modules/react-vis/es/sunburst/index.js","./make-vis-flexible":"../node_modules/react-vis/es/make-vis-flexible.js","./utils/axis-utils":"../node_modules/react-vis/es/utils/axis-utils.js","./utils/scales-utils":"../node_modules/react-vis/es/utils/scales-utils.js"}],"Emissions.js":[function(require,module,exports) {
+},{"./plot/series/abstract-series":"../node_modules/react-vis/es/plot/series/abstract-series.js","./plot/series/line-series":"../node_modules/react-vis/es/plot/series/line-series.js","./plot/series/line-series-canvas":"../node_modules/react-vis/es/plot/series/line-series-canvas.js","./plot/series/horizontal-bar-series":"../node_modules/react-vis/es/plot/series/horizontal-bar-series.js","./plot/series/horizontal-bar-series-canvas":"../node_modules/react-vis/es/plot/series/horizontal-bar-series-canvas.js","./plot/series/vertical-bar-series":"../node_modules/react-vis/es/plot/series/vertical-bar-series.js","./plot/series/vertical-bar-series-canvas":"../node_modules/react-vis/es/plot/series/vertical-bar-series-canvas.js","./plot/series/vertical-rect-series":"../node_modules/react-vis/es/plot/series/vertical-rect-series.js","./plot/series/vertical-rect-series-canvas":"../node_modules/react-vis/es/plot/series/vertical-rect-series-canvas.js","./plot/series/horizontal-rect-series":"../node_modules/react-vis/es/plot/series/horizontal-rect-series.js","./plot/series/horizontal-rect-series-canvas":"../node_modules/react-vis/es/plot/series/horizontal-rect-series-canvas.js","./plot/series/label-series":"../node_modules/react-vis/es/plot/series/label-series.js","./plot/series/polygon-series":"../node_modules/react-vis/es/plot/series/polygon-series.js","./plot/series/rect-series":"../node_modules/react-vis/es/plot/series/rect-series.js","./plot/series/rect-series-canvas":"../node_modules/react-vis/es/plot/series/rect-series-canvas.js","./plot/series/mark-series":"../node_modules/react-vis/es/plot/series/mark-series.js","./plot/series/mark-series-canvas":"../node_modules/react-vis/es/plot/series/mark-series-canvas.js","./plot/series/whisker-series":"../node_modules/react-vis/es/plot/series/whisker-series.js","./plot/series/heatmap-series":"../node_modules/react-vis/es/plot/series/heatmap-series.js","./plot/series/hexbin-series":"../node_modules/react-vis/es/plot/series/hexbin-series.js","./plot/series/contour-series":"../node_modules/react-vis/es/plot/series/contour-series.js","./plot/series/custom-svg-series":"../node_modules/react-vis/es/plot/series/custom-svg-series.js","./plot/series/area-series":"../node_modules/react-vis/es/plot/series/area-series.js","./plot/series/arc-series":"../node_modules/react-vis/es/plot/series/arc-series.js","./plot/series/line-mark-series":"../node_modules/react-vis/es/plot/series/line-mark-series.js","./plot/series/line-mark-series-canvas":"../node_modules/react-vis/es/plot/series/line-mark-series-canvas.js","./plot/hint":"../node_modules/react-vis/es/plot/hint.js","./plot/borders":"../node_modules/react-vis/es/plot/borders.js","./plot/crosshair":"../node_modules/react-vis/es/plot/crosshair.js","./plot/xy-plot":"../node_modules/react-vis/es/plot/xy-plot.js","./plot/axis/decorative-axis":"../node_modules/react-vis/es/plot/axis/decorative-axis.js","./plot/axis/x-axis":"../node_modules/react-vis/es/plot/axis/x-axis.js","./plot/axis/y-axis":"../node_modules/react-vis/es/plot/axis/y-axis.js","./plot/circular-grid-lines":"../node_modules/react-vis/es/plot/circular-grid-lines.js","./plot/grid-lines":"../node_modules/react-vis/es/plot/grid-lines.js","./plot/gradient-defs":"../node_modules/react-vis/es/plot/gradient-defs.js","./plot/vertical-grid-lines":"../node_modules/react-vis/es/plot/vertical-grid-lines.js","./plot/horizontal-grid-lines":"../node_modules/react-vis/es/plot/horizontal-grid-lines.js","./plot/voronoi":"../node_modules/react-vis/es/plot/voronoi.js","./plot/highlight":"../node_modules/react-vis/es/plot/highlight.js","./legends/discrete-color-legend":"../node_modules/react-vis/es/legends/discrete-color-legend.js","./legends/searchable-discrete-color-legend":"../node_modules/react-vis/es/legends/searchable-discrete-color-legend.js","./legends/continuous-color-legend":"../node_modules/react-vis/es/legends/continuous-color-legend.js","./legends/continuous-size-legend":"../node_modules/react-vis/es/legends/continuous-size-legend.js","./treemap":"../node_modules/react-vis/es/treemap/index.js","./radial-chart":"../node_modules/react-vis/es/radial-chart/index.js","./radar-chart":"../node_modules/react-vis/es/radar-chart/index.js","./parallel-coordinates":"../node_modules/react-vis/es/parallel-coordinates/index.js","./sankey":"../node_modules/react-vis/es/sankey/index.js","./sunburst":"../node_modules/react-vis/es/sunburst/index.js","./make-vis-flexible":"../node_modules/react-vis/es/make-vis-flexible.js","./utils/axis-utils":"../node_modules/react-vis/es/utils/axis-utils.js","./utils/scales-utils":"../node_modules/react-vis/es/utils/scales-utils.js"}],"helpers.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.integrateLinear = exports.integrateData = exports.fillInLinear = exports.isLastValue = exports.lastValue = void 0;
+
+var lastValue = function lastValue(series) {
+  return series[series.length - 1];
+};
+
+exports.lastValue = lastValue;
+
+var isLastValue = function isLastValue(haystack, needle) {
+  return lastValue(haystack) === needle;
+};
+
+exports.isLastValue = isLastValue;
+
+var fillInLinear = function fillInLinear(startPoint, endPoint) {
+  var spacing = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  var slope = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x);
+  var acc = [startPoint];
+
+  while (lastValue(acc).x < endPoint.x) {
+    acc = acc.concat({
+      x: lastValue(acc).x + spacing,
+      y: lastValue(acc).y + spacing * slope
+    });
+  }
+
+  return acc;
+};
+
+exports.fillInLinear = fillInLinear;
+
+var integrateData = function integrateData(series) {
+  var sum = 0;
+  return series.map(function (value) {
+    sum = sum + value;
+    return sum;
+  });
+};
+
+exports.integrateData = integrateData;
+
+var integrateLinear = function integrateLinear(startPoint, endPoint) {
+  var points = fillInLinear(startPoint, endPoint);
+  var yValues = integrateData(points.map(function (point) {
+    return point.y;
+  }));
+  return points.map(function (point, i) {
+    return {
+      x: point.x,
+      y: yValues[i]
+    };
+  });
+};
+
+exports.integrateLinear = integrateLinear;
+},{}],"Emissions.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -62537,6 +62598,8 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 
 var _reactVis = require("react-vis");
+
+var _helpers = require("./helpers");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -62550,13 +62613,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var COLORS = ['#003f5c', '#374c80', '#7a5195', '#bc5090', '#ef5675', '#ff764a', '#ffa600'];
 
@@ -62572,15 +62635,22 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Emissions).call(this, props));
     _this.state = {
-      selectedSeries: 0
+      selectedSeries: 0,
+      isDragging: false
     };
+    _this.setSelected = _this._setSelected.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(Emissions, [{
     key: "_setSelected",
     value: function _setSelected(point) {
-      console.log(point);
+      var i = this.props.projectedValues.findIndex(function (value) {
+        return value === point.y;
+      });
+      this.setState({
+        selectedSeries: i
+      });
     }
   }, {
     key: "render",
@@ -62590,9 +62660,9 @@ function (_React$Component) {
       return _react.default.createElement(_reactVis.XYPlot, {
         width: 600,
         height: 600,
+        xDomain: [1965, 2050],
         yDomain: [0, 24000],
-        className: "emissions-chart--regional",
-        onMouseMove: console.log
+        className: "emissions-chart--regional"
       }, _react.default.createElement(_reactVis.XAxis, {
         tickValues: [1965, 1985, 2005, 2025, 2045],
         tickFormat: function tickFormat(x) {
@@ -62619,7 +62689,7 @@ function (_React$Component) {
           key: series.name
         });
       }), props.projectedValues.map(function (value, i) {
-        var last = props.data[i].years1965to2017[props.data[i].years1965to2017.length - 1];
+        var last = (0, _helpers.lastValue)(props.data[i].years1965to2017);
         return _react.default.createElement(_reactVis.LineSeries, {
           data: [{
             x: 2017,
@@ -62634,15 +62704,13 @@ function (_React$Component) {
           key: props.data[i].name
         });
       }), _react.default.createElement(_reactVis.Voronoi, {
-        nodes: props.data.map(function (series) {
+        nodes: props.projectedValues.map(function (value) {
           return {
             x: 2045,
-            y: series.years1965to2017[series.years1965to2017.length - 1]
+            y: value
           };
         }),
-        polygonStyle: {
-          stroke: '#ccc'
-        }
+        onHover: this.setSelected
       }));
     }
   }]);
@@ -62652,7 +62720,7 @@ function (_React$Component) {
 
 var _default = Emissions;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-vis":"../node_modules/react-vis/es/index.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-vis":"../node_modules/react-vis/es/index.js","./helpers":"helpers.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -62664,6 +62732,8 @@ require("./App.scss");
 var _api = require("./api");
 
 var _Emissions = _interopRequireDefault(require("./Emissions"));
+
+var _helpers = require("./helpers");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -62717,7 +62787,7 @@ function (_React$Component) {
           loadState: 2,
           data: res,
           projectedValues: res.map(function (series) {
-            return series.years1965to2017[series.years1965to2017.length - 1];
+            return (0, _helpers.lastValue)(series.years1965to2017);
           })
         });
       });
@@ -62737,7 +62807,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById('react-entry'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./App.scss":"App.scss","./api":"api.js","./Emissions":"Emissions.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./App.scss":"App.scss","./api":"api.js","./Emissions":"Emissions.js","./helpers":"helpers.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -62764,7 +62834,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39922" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42428" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -4,6 +4,9 @@ import './App.scss'
 
 import {regions} from './api'
 import Emissions from './Emissions'
+import {
+  lastValue,
+} from './helpers'
 
 class App extends React.Component {
   constructor(props) {
@@ -25,7 +28,7 @@ class App extends React.Component {
       this.setState({
         loadState: 2,
         data: res,
-        projectedValues: res.map(series => series.years1965to2017[series.years1965to2017.length - 1])
+        projectedValues: res.map(series => lastValue(series.years1965to2017))
       })
     })
   }

@@ -2,6 +2,10 @@ import React from 'react'
 
 import {XYPlot, XAxis, YAxis, LineSeries, Voronoi} from 'react-vis'
 
+import {
+  lastValue,
+} from './helpers'
+
 const COLORS = [
   '#003f5c',
   '#374c80',
@@ -18,11 +22,17 @@ class Emissions extends React.Component {
 
     this.state = {
       selectedSeries: 0,
+      isDragging: false
     }
+
+    this.setSelected = this._setSelected.bind(this)
   }
 
   _setSelected(point) {
-    console.log(point)
+    const i = this.props.projectedValues.findIndex(value => value === point.y)
+    this.setState({
+      selectedSeries: i
+    })
   }
 
   render() {
@@ -32,9 +42,9 @@ class Emissions extends React.Component {
       <XYPlot
         width={600}
         height={600}
+        xDomain={[1965, 2050]}
         yDomain={[0, 24000]}
         className="emissions-chart--regional"
-        onMouseMove={console.log}
       >
 
         <XAxis
@@ -62,7 +72,7 @@ class Emissions extends React.Component {
         )}
 
         {props.projectedValues.map((value, i) => {
-          const last = props.data[i].years1965to2017[props.data[i].years1965to2017.length - 1]
+          const last = lastValue(props.data[i].years1965to2017)
           return (
             <LineSeries
               data={[ {x: 2017, y: last}, {x: 2045, y: value} ]}
@@ -75,8 +85,8 @@ class Emissions extends React.Component {
         })}
 
         <Voronoi
-          nodes={props.data.map(series => ({x: 2045, y: series.years1965to2017[series.years1965to2017.length - 1]})) }
-          polygonStyle={{stroke: '#ccc'}}
+          nodes={props.projectedValues.map(value => ({x: 2045, y: value}))}
+          onHover={this.setSelected}
         />
 
       </XYPlot>
