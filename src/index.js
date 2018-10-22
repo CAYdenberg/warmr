@@ -4,6 +4,7 @@ import './App.scss'
 
 import {regions} from './api'
 import Emissions from './Emissions'
+import Warming from './Warming'
 import {
   lastValue,
 } from './helpers'
@@ -13,9 +14,9 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      loadState: 0,
       data: null,
       projectedValues: [],
+      loadState: 0,
     }
   }
 
@@ -36,7 +37,12 @@ class App extends React.Component {
   render() {
     if (!this.state.data) return null
 
-    return <Emissions data={this.state.data} projectedValues={this.state.projectedValues} />
+    return (
+      <React.Fragment>
+        <Emissions data={this.state.data} projectedValues={this.state.projectedValues} />
+        <Warming data={this.state.data} projectedValues={this.state.projectedValues} />
+      </React.Fragment>
+    )
   }
 }
 

@@ -62720,6 +62720,87 @@ function (_React$Component) {
 
 var _default = Emissions;
 exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-vis":"../node_modules/react-vis/es/index.js","./helpers":"helpers.js"}],"Warming.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactVis = require("react-vis");
+
+var _helpers = require("./helpers");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var COLOR = '#003f5c';
+
+var Warming = function Warming(props) {
+  var cumulativeTotals = props.data.map(function (series) {
+    return (0, _helpers.integrateData)(series.years1965to2017);
+  });
+  var cumulativeGrandTotals = cumulativeTotals[0].map(function (_, i) {
+    return cumulativeTotals.reduce(function (total, series) {
+      return series[i] + total;
+    }, 0);
+  });
+  var projectedData = props.data.map(function (series, i) {
+    return (0, _helpers.integrateLinear)({
+      x: 2017,
+      y: (0, _helpers.lastValue)(series.years1965to2017)
+    }, {
+      x: 2045,
+      y: props.projectedValues[i]
+    });
+  });
+  var cumulativeProjectedTotals = projectedData[0].map(function (_, i) {
+    return projectedData.reduce(function (total, series) {
+      return series[i].y + total;
+    }, 0);
+  });
+  return _react.default.createElement(_reactVis.XYPlot, {
+    width: 600,
+    height: 600,
+    xDomain: [1965, 2050]
+  }, _react.default.createElement(_reactVis.XAxis, {
+    tickValues: [1965, 1985, 2005, 2025, 2045],
+    tickFormat: function tickFormat(x) {
+      return x;
+    },
+    position: "middle"
+  }), _react.default.createElement(_reactVis.YAxis, {
+    position: "middle",
+    width: 50,
+    tickFormat: function tickFormat(x) {
+      return x / 1000;
+    }
+  }), _react.default.createElement(_reactVis.LineSeries, {
+    data: cumulativeGrandTotals.map(function (cumulativeGrandTotal, i) {
+      return {
+        x: i + 1965,
+        y: cumulativeGrandTotal
+      };
+    }),
+    className: "line-series",
+    stroke: COLOR
+  }), _react.default.createElement(_reactVis.LineSeries, {
+    data: cumulativeProjectedTotals.map(function (cumulativeProjectedTotal, i) {
+      return {
+        x: i + 2017,
+        y: cumulativeProjectedTotal + (0, _helpers.lastValue)(cumulativeGrandTotals)
+      };
+    }),
+    stroke: COLOR,
+    className: "line-series",
+    strokeStyle: "dashed"
+  }));
+};
+
+var _default = Warming;
+exports.default = _default;
 },{"react":"../node_modules/react/index.js","react-vis":"../node_modules/react-vis/es/index.js","./helpers":"helpers.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -62732,6 +62813,8 @@ require("./App.scss");
 var _api = require("./api");
 
 var _Emissions = _interopRequireDefault(require("./Emissions"));
+
+var _Warming = _interopRequireDefault(require("./Warming"));
 
 var _helpers = require("./helpers");
 
@@ -62767,9 +62850,9 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
-      loadState: 0,
       data: null,
-      projectedValues: []
+      projectedValues: [],
+      loadState: 0
     };
     return _this;
   }
@@ -62796,10 +62879,13 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       if (!this.state.data) return null;
-      return _react.default.createElement(_Emissions.default, {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Emissions.default, {
         data: this.state.data,
         projectedValues: this.state.projectedValues
-      });
+      }), _react.default.createElement(_Warming.default, {
+        data: this.state.data,
+        projectedValues: this.state.projectedValues
+      }));
     }
   }]);
 
@@ -62807,7 +62893,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById('react-entry'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./App.scss":"App.scss","./api":"api.js","./Emissions":"Emissions.js","./helpers":"helpers.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./App.scss":"App.scss","./api":"api.js","./Emissions":"Emissions.js","./Warming":"Warming.js","./helpers":"helpers.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -62834,7 +62920,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42428" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38800" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
