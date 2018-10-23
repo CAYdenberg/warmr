@@ -8,7 +8,7 @@ package-lock.json
 /coverage
 
 # production
-/server/static
+/app/static
 /.cache
 /v8-compile-cache*
 /app/static/*
