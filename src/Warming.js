@@ -6,6 +6,7 @@ import {
   lastValue,
   integrateData,
   integrateLinear,
+  sumSeries
 } from './helpers'
 
 const COLOR = '#003f5c'
@@ -14,23 +15,16 @@ const Warming = props => {
   const cumulativeTotals = props.data.map(series =>
     integrateData(series.years1965to2017)
   )
-  const cumulativeGrandTotals = cumulativeTotals[0].map((_, i) => {
-    return cumulativeTotals.reduce((total, series) =>
-      series[i] + total
-    , 0)
-  })
+  const cumulativeWorldTotals = sumSeries(cumulativeTotals)
 
   const projectedData = props.data.map((series, i) =>
     integrateLinear(
-      {x: 2017, y: lastValue(series.years1965to2017)},
-      {x: 2045, y: props.projectedValues[i]}
+      lastValue(series.years1965to2017),
+      props.projectedValues[i],
+      (2045 - 2018)
     )
   )
-  const cumulativeProjectedTotals = projectedData[0].map((_, i) => {
-    return projectedData.reduce((total, series) =>
-      series[i].y + total
-    , 0)
-  })
+  const cumulativeProjectedTotals = sumSeries(projectedData)
 
   return (
     <XYPlot
@@ -51,17 +45,23 @@ const Warming = props => {
         tickFormat={x => x / 1000}
       />
 
+      {/*
+        2nd YAxis - conversion rate is 1.5 deg per trillion Tonnes C
+        which equals 0.4 deg per trillion Tonnes CO2. The 1000 mark on the primary
+        axis is 1 trillion tonnes C02.
+      */}
+
       <LineSeries
-        data={cumulativeGrandTotals.map((cumulativeGrandTotal, i) =>
-          ({x: i + 1965, y: cumulativeGrandTotal})
+        data={cumulativeWorldTotals.map((value, i) =>
+          ({x: i + 1965, y: value})
         )}
         className="line-series"
         stroke={COLOR}
       />
 
       <LineSeries
-        data={cumulativeProjectedTotals.map((cumulativeProjectedTotal, i) =>
-          ({x: i + 2017, y: cumulativeProjectedTotal + lastValue(cumulativeGrandTotals)})
+        data={cumulativeProjectedTotals.map((value, i) =>
+          ({x: i + 2018, y: value + lastValue(cumulativeWorldTotals)})
         )}
         stroke={COLOR}
         className="line-series"

@@ -62532,7 +62532,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.integrateLinear = exports.integrateData = exports.fillInLinear = exports.isLastValue = exports.lastValue = void 0;
+exports.sumSeries = exports.integrateLinear = exports.integrateData = exports.fillInLinear = exports.isLastValue = exports.lastValue = void 0;
 
 var lastValue = function lastValue(series) {
   return series[series.length - 1];
@@ -62573,20 +62573,26 @@ var integrateData = function integrateData(series) {
 
 exports.integrateData = integrateData;
 
-var integrateLinear = function integrateLinear(startPoint, endPoint) {
-  var points = fillInLinear(startPoint, endPoint);
-  var yValues = integrateData(points.map(function (point) {
-    return point.y;
-  }));
-  return points.map(function (point, i) {
-    return {
-      x: point.x,
-      y: yValues[i]
-    };
+var integrateLinear = function integrateLinear(startPoint, endPoint, spread) {
+  var sum = 0;
+  var slope = (endPoint - startPoint) / spread;
+  return Array(spread + 1).fill(null).map(function (_, i) {
+    sum += startPoint + slope * i;
+    return sum;
   });
 };
 
 exports.integrateLinear = integrateLinear;
+
+var sumSeries = function sumSeries(dataFrame) {
+  return dataFrame[0].map(function (_, i) {
+    return dataFrame.reduce(function (columnTotal, series) {
+      return columnTotal + series[i];
+    }, 0);
+  });
+};
+
+exports.sumSeries = sumSeries;
 },{}],"Emissions.js":[function(require,module,exports) {
 "use strict";
 
@@ -62742,25 +62748,11 @@ var Warming = function Warming(props) {
   var cumulativeTotals = props.data.map(function (series) {
     return (0, _helpers.integrateData)(series.years1965to2017);
   });
-  var cumulativeGrandTotals = cumulativeTotals[0].map(function (_, i) {
-    return cumulativeTotals.reduce(function (total, series) {
-      return series[i] + total;
-    }, 0);
-  });
+  var cumulativeWorldTotals = (0, _helpers.sumSeries)(cumulativeTotals);
   var projectedData = props.data.map(function (series, i) {
-    return (0, _helpers.integrateLinear)({
-      x: 2017,
-      y: (0, _helpers.lastValue)(series.years1965to2017)
-    }, {
-      x: 2045,
-      y: props.projectedValues[i]
-    });
+    return (0, _helpers.integrateLinear)((0, _helpers.lastValue)(series.years1965to2017), props.projectedValues[i], 2045 - 2018);
   });
-  var cumulativeProjectedTotals = projectedData[0].map(function (_, i) {
-    return projectedData.reduce(function (total, series) {
-      return series[i].y + total;
-    }, 0);
-  });
+  var cumulativeProjectedTotals = (0, _helpers.sumSeries)(projectedData);
   return _react.default.createElement(_reactVis.XYPlot, {
     width: 600,
     height: 600,
@@ -62778,19 +62770,19 @@ var Warming = function Warming(props) {
       return x / 1000;
     }
   }), _react.default.createElement(_reactVis.LineSeries, {
-    data: cumulativeGrandTotals.map(function (cumulativeGrandTotal, i) {
+    data: cumulativeWorldTotals.map(function (value, i) {
       return {
         x: i + 1965,
-        y: cumulativeGrandTotal
+        y: value
       };
     }),
     className: "line-series",
     stroke: COLOR
   }), _react.default.createElement(_reactVis.LineSeries, {
-    data: cumulativeProjectedTotals.map(function (cumulativeProjectedTotal, i) {
+    data: cumulativeProjectedTotals.map(function (value, i) {
       return {
-        x: i + 2017,
-        y: cumulativeProjectedTotal + (0, _helpers.lastValue)(cumulativeGrandTotals)
+        x: i + 2018,
+        y: value + (0, _helpers.lastValue)(cumulativeWorldTotals)
       };
     }),
     stroke: COLOR,
@@ -62920,7 +62912,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38800" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33882" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

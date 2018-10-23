@@ -4,6 +4,7 @@ import {
   fillInLinear,
   integrateData,
   integrateLinear,
+  sumSeries
 } from '../helpers'
 
 describe('lastValue', () => {
@@ -44,15 +45,18 @@ describe('integrateData', () => {
 })
 
 describe('integrateLinear', () => {
-  it('should calculate the area under a line from a pair of x/y coordinates', () => {
-    const startPoint = {x: 0, y: 0}
-    const endPoint = {x: 4, y: 4}
-    expect(integrateLinear(startPoint, endPoint)).toEqual([
-      {x: 0, y: 0},
-      {x: 1, y: 1},
-      {x: 2, y: 3},
-      {x: 3, y: 6},
-      {x: 4, y: 10}
-    ])
+  it('should calculate the area under a line from two y-coords and the distance between them', () => {
+    expect(integrateLinear(0, 4, 4)).toEqual([0, 1, 3, 6, 10])
+  })
+})
+
+describe('sumSeries', () => {
+  it('should sum the contained dimension of a 2D array', () => {
+    const input = [
+      [1, 2, 3],
+      [4, 5, 6]
+    ]
+    const expected = [5, 7, 9]
+    expect(sumSeries(input)).toEqual(expected)
   })
 })

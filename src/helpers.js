@@ -27,10 +27,19 @@ export const integrateData = series => {
   })
 }
 
-export const integrateLinear = (startPoint, endPoint) => {
-  const points = fillInLinear(startPoint, endPoint)
-  const yValues = integrateData(points.map(point => point.y))
-  return points.map((point, i) => {
-    return {x: point.x, y: yValues[i]}
+export const integrateLinear = (startPoint, endPoint, spread) => {
+  let sum = 0
+  const slope = (endPoint - startPoint) / spread
+  return Array(spread + 1).fill(null).map((_, i) => {
+    sum += startPoint + slope * i
+    return sum
+  })
+}
+
+export const sumSeries = dataFrame => {
+  return dataFrame[0].map((_, i) => {
+    return dataFrame.reduce((columnTotal, series) =>
+      columnTotal + series[i]
+    , 0)
   })
 }
