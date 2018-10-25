@@ -5,8 +5,37 @@
 </head>
 
 <body>
-  <div id="react-entry"></div>
+  <div class="container">
+    <div class="content">
+      <h1>Predicting the future of climate change</h1>
+      <p>A curious feature of some climate models is that they predict a linear relationship between cumulative carbon emissions
+        and total warming. This means we can try to guess the climate response by extrapolating emissions trends.</p>
+    </div>
 
-  <script src="{{ js_entry }}"></script>
+    <hr />
+    <div id="react-entry"></div>
+    <hr />
+
+    <div class="content">
+      <h2>Notes:</h2>
+      <ol>
+        <li>Emissions data from
+          <a href="https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html" target="_blank">
+            BP Statistical Review of World Energy
+          </a>
+        </li>
+        <li>The climate-carbon response (CCR) is estimated in
+          <a href="http://dx.doi.org/10.1038/nature08047">
+            Matthews et al (2009)
+          </a>
+          to be about 1 degree celcius per 1 trillion tonnes carbon, or ~ 0.4 deg celcius per 1 trillion tonnes CO2. The 95% confidence interval for this estimate ranges from 0.2 - 0.6 degrees C, and these values are used to generate the endpoints of the red gradient.
+        </li>
+        <li>This only takes into account global warming due to CO2, and not other greenhouse gasses.</li>
+      </ol>
+
+      <p>Questions? Comments? <a href="https://github.com/CAYdenberg/warmr/issues">Report via GitHub!</a></p>
+    </div>
+
+    <script src="{{ js_entry }}"></script>
 </body>
 </html>

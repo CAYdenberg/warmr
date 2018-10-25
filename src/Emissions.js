@@ -1,20 +1,15 @@
 import React from 'react'
 
-import {XYPlot, XAxis, YAxis, LineSeries, Voronoi} from 'react-vis'
+import XYPlot from 'react-vis/dist/plot/xy-plot'
+import XAxis from 'react-vis/dist/plot/axis/x-axis'
+import YAxis from 'react-vis/dist/plot/axis/y-axis'
+import LineSeries from 'react-vis/dist/plot/series/line-series'
+import Voronoi from 'react-vis/dist/plot/voronoi'
 
 import {
   lastValue,
 } from './helpers'
-
-const COLORS = [
-  '#003f5c',
-  '#374c80',
-  '#7a5195',
-  '#bc5090',
-  '#ef5675',
-  '#ff764a',
-  '#ffa600'
-]
+import {SERIES_COLORS, AXIS_STYLE} from './constants'
 
 class Emissions extends React.Component {
   constructor(props) {
@@ -87,12 +82,13 @@ class Emissions extends React.Component {
         <XAxis
           tickValues={[1965, 1985, 2005, 2025, 2045]}
           tickFormat={x => x}
-          position="middle"
+          style={AXIS_STYLE}
+          title="Year"
         />
 
         <YAxis
-          position="middle"
-          width={50}
+          title="Emissions (billion tonnes CO2)"
+          style={AXIS_STYLE}
           tickFormat={x => x / 1000}
         />
 
@@ -102,7 +98,7 @@ class Emissions extends React.Component {
               ({x: i + 1965, y: datapoint})
             )}
             className="line-series"
-            stroke={COLORS[i]}
+            stroke={SERIES_COLORS[i]}
             strokeWidth={state.selectedSeries === i ? 4 : 2}
             key={series.name}
           />
@@ -113,7 +109,7 @@ class Emissions extends React.Component {
           return (
             <LineSeries
               data={[ {x: 2017, y: last}, {x: 2045, y: value} ]}
-              stroke={COLORS[i]}
+              stroke={SERIES_COLORS[i]}
               strokeStyle="dashed"
               strokeWidth={state.selectedSeries === i ? 4 : 2}
               key={props.data[i].name}

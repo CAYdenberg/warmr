@@ -1,6 +1,11 @@
 import React from 'react'
 
-import {XYPlot, XAxis, YAxis, LineSeries, VerticalRectSeries, GradientDefs} from 'react-vis'
+import XYPlot from 'react-vis/dist/plot/xy-plot'
+import XAxis from 'react-vis/dist/plot/axis/x-axis'
+import YAxis from 'react-vis/dist/plot/axis/y-axis'
+import LineSeries from 'react-vis/dist/plot/series/line-series'
+import VerticalRectSeries from 'react-vis/dist/plot/series/vertical-rect-series'
+import GradientDefs from 'react-vis/dist/plot/gradient-defs'
 
 import {
   lastValue,
@@ -8,8 +13,7 @@ import {
   integrateLinear,
   sumSeries
 } from './helpers'
-
-const COLOR = '#003f5c'
+import {SERIES_COLORS, AXIS_STYLE} from './constants'
 
 const Warming = props => {
   const cumulativeTotals = props.data.map(series =>
@@ -28,9 +32,10 @@ const Warming = props => {
 
   return (
     <XYPlot
-      width={600}
+      width={800}
       height={600}
-      xDomain={[1965, 2050]}
+      xDomain={[1965, 2100]}
+      margin={{left: 50, right: 50}}
     >
       <GradientDefs>
         <linearGradient id="warming-range" x0="0" x2="0" y1="0" y2="1">
@@ -41,23 +46,27 @@ const Warming = props => {
       </GradientDefs>
 
       <XAxis
-        tickValues={[1965, 1985, 2005, 2025, 2045]}
+        tickValues={[1965, 1985, 2005, 2025, 2045, 2065, 2085]}
         tickFormat={x => x}
+        title="Year"
+        style={AXIS_STYLE}
         position="middle"
       />
 
       <YAxis
-        position="middle"
-        width={50}
+        title="Cumulative Emissions (billion tonnes CO2)"
         tickFormat={x => x / 1000}
+        style={AXIS_STYLE}
       />
 
       <YAxis
-        position="middle"
+        position="start"
+        title="Total warming (deg C)"
         orientation="right"
-        left={550}
+        left={750}
         width={50}
         tickFormat={x => x / (2.5 * 10e5)}
+        style={AXIS_STYLE}
       />
 
       {/*
@@ -71,14 +80,14 @@ const Warming = props => {
           ({x: i + 1965, y: value})
         )}
         className="line-series"
-        stroke={COLOR}
+        stroke={SERIES_COLORS[0]}
       />
 
       <LineSeries
         data={cumulativeProjectedTotals.map((value, i) =>
           ({x: i + 2018, y: value + lastValue(cumulativeWorldTotals)})
         )}
-        stroke={COLOR}
+        stroke={SERIES_COLORS[0]}
         className="line-series"
         strokeStyle="dashed"
       />
