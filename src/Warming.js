@@ -24,8 +24,8 @@ const Warming = props => {
   const projectedData = props.data.map((series, i) =>
     integrateLinear(
       lastValue(series.years1965to2017),
-      props.projectedValues[i],
-      (2045 - 2018)
+      props.slopes[i],
+      (2100 - 2017)
     )
   )
   const cumulativeProjectedTotals = sumSeries(projectedData)
@@ -68,12 +68,6 @@ const Warming = props => {
         tickFormat={x => x / (2.5 * 10e5)}
         style={AXIS_STYLE}
       />
-
-      {/*
-        2nd YAxis - conversion rate is 1.5 deg per trillion Tonnes C
-        which equals 0.4 deg per trillion Tonnes CO2. The 1000 mark on the primary
-        axis is 1 trillion tonnes C02.
-      */}
 
       <LineSeries
         data={cumulativeWorldTotals.map((value, i) =>

@@ -6,7 +6,7 @@ body {
 }
 
 .rv-xy-plot {
-  user-select: none !important; 
+  user-select: none !important;
 }
 
 .line-series,
@@ -17,4 +17,9 @@ body {
 
 .emissions-chart--regional {
   margin: 25px;
+}
+
+.is-expanded {
+  flex-grow: 1;
+  width: 100%;
 }

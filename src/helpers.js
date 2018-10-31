@@ -22,14 +22,8 @@ export const integrateData = series => {
   })
 }
 
-export const integrateLinear = (startPoint, endPoint, spread) => {
-  let sum = 0
-  const slope = (endPoint - startPoint) / spread
-  return Array(spread + 1).fill(null).map((_, i) => {
-    sum += startPoint + slope * i
-    return sum
-  })
-}
+export const integrateLinear = (startPoint, slope, spread) =>
+  integrateData(createLinearSeries(startPoint, slope, spread))
 
 export const sumSeries = dataFrame => {
   return dataFrame[0].map((_, i) => {

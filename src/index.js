@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom'
 import './App.scss'
 
 import {regions} from './api'
+import SlopeForm from './SlopeForm'
 import Emissions from './Emissions'
 import Warming from './Warming'
-import {
-  lastValue,
-} from './helpers'
 
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +18,7 @@ class App extends React.Component {
     }
 
     this.updateProjection = this._updateProjection.bind(this)
+    this.assignSlope = this._assignSlope.bind(this)
   }
 
   componentDidMount() {
@@ -31,7 +30,7 @@ class App extends React.Component {
       this.setState({
         loadState: 2,
         data: res,
-        slopes: res.map(() => 0)
+        slopes: res.map(() => 1)
       })
     })
   }
@@ -47,17 +46,42 @@ class App extends React.Component {
     })
   }
 
+  _assignSlope(series, newSlope) {
+    this.setState(state => {
+      return {
+        ...state,
+        slopes: state.slopes.map((value, i) =>
+          (series === i) ? newSlope : value
+        )
+      }
+    })
+  }
+
   render() {
     if (!this.state.data) return null
 
+    const names = this.state.data.map(series => series.name)
+    const slopes = this.state.slopes
+
     return (
       <React.Fragment>
-        <Emissions
+        <div className="is-flex">
+          <Emissions
+            data={this.state.data}
+            slopes={this.state.slopes}
+            onSeriesDrag={this.updateProjection}
+          />
+          <SlopeForm
+            names={names}
+            slopes={slopes}
+            assignSlope={this.assignSlope}
+          />
+        </div>
+
+        <Warming
           data={this.state.data}
           slopes={this.state.slopes}
-          onSeriesDrag={this.updateProjection}
         />
-        {/* <Warming data={this.state.data} projectedValues={this.state.projectedValues} /> */}
       </React.Fragment>
     )
   }

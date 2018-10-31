@@ -44,7 +44,7 @@ describe('integrateData', () => {
 
 describe('integrateLinear', () => {
   it('should calculate the area under a line from two y-coords and the distance between them', () => {
-    expect(integrateLinear(0, 4, 4)).toEqual([0, 1, 3, 6, 10])
+    expect(integrateLinear(0, 1, 4)).toEqual([0, 1, 3, 6, 10])
   })
 })
 
