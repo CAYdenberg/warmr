@@ -1,7 +1,7 @@
 import {
   lastValue,
   isLastValue,
-  fillInLinear,
+  createLinearSeries,
   integrateData,
   integrateLinear,
   sumSeries
@@ -23,17 +23,15 @@ describe('isLastValue', () => {
   })
 })
 
-describe('fillInLinear', () => {
-  it('should calculate a series of linear data points from a two points', () => {
-    const startPoint = {x: 0, y: 0}
-    const endPoint = {x: 4, y: 4}
-    const spacing = 2
-    const result = fillInLinear(startPoint, endPoint, spacing)
-    expect(result).toEqual([
-      {x: 0, y: 0},
-      {x: 2, y: 2},
-      {x: 4, y: 4}
-    ])
+describe('createLinearSeries', () => {
+  it('should calculate a series from a startPoint, slope and number of data points', () => {
+    const result = createLinearSeries(0, 1, 4)
+    expect(result).toEqual([0, 1, 2, 3, 4])
+  })
+
+  it('should bottom out at 0', () => {
+    const result = createLinearSeries(2, -1, 4)
+    expect(result).toEqual([2, 1, 0, 0, 0])
   })
 })
 

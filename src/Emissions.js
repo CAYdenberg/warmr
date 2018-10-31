@@ -8,6 +8,7 @@ import Voronoi from 'react-vis/dist/plot/voronoi'
 
 import {
   lastValue,
+  createLinearSeries
 } from './helpers'
 import {SERIES_COLORS, AXIS_STYLE} from './constants'
 
@@ -28,10 +29,10 @@ class Emissions extends React.Component {
   }
 
   _setSelected(point) {
+    // do not change while dragging
     if (this.state.yPos) return
-    const i = this.props.projectedValues.findIndex(value => value === point.y)
     this.setState({
-      selectedSeries: i
+      selectedSeries: point.series
     })
   }
 
@@ -44,7 +45,6 @@ class Emissions extends React.Component {
 
   _handleMouseUp() {
     this.setState({
-      isDragging: false,
       xPos: null,
       yPos: null,
     })
@@ -67,6 +67,25 @@ class Emissions extends React.Component {
   render() {
     const {state, props} = this
 
+    const projectedSeries = props.data.map((series, i) =>
+      ({
+        name: series.name,
+        years2017to2045: createLinearSeries(
+          lastValue(series.years1965to2017),
+          props.slopes[i],
+          28
+        )
+      })
+    )
+    const voronoiNodes = [].concat.apply(
+      [],
+      projectedSeries.map((series, seriesIndex) =>
+        series.years2017to2045.map((datapoint, i) =>
+          ({x: i + 2017, y: datapoint, series: seriesIndex})
+        )
+      )
+    )
+
     return (
       <XYPlot
         width={600}
@@ -76,6 +95,7 @@ class Emissions extends React.Component {
         className="emissions-chart--regional"
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
+        onMouseLeave={this.handleMouseUp}
         onMouseMove={this.handleDrag}
       >
 
@@ -104,11 +124,12 @@ class Emissions extends React.Component {
           />
         )}
 
-        {props.projectedValues.map((value, i) => {
-          const last = lastValue(props.data[i].years1965to2017)
+        {projectedSeries.map((series, i) => {
           return (
             <LineSeries
-              data={[ {x: 2017, y: last}, {x: 2045, y: value} ]}
+              data={series.years2017to2045.map((datapoint, i) =>
+                ({x: i + 2017, y: datapoint})
+              )}
               stroke={SERIES_COLORS[i]}
               strokeStyle="dashed"
               strokeWidth={state.selectedSeries === i ? 4 : 2}
@@ -118,7 +139,7 @@ class Emissions extends React.Component {
         })}
 
         <Voronoi
-          nodes={props.projectedValues.map(value => ({x: 2045, y: value}))}
+          nodes={voronoiNodes}
           onHover={this.setSelected}
         />
 

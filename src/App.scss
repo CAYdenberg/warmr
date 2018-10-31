@@ -5,9 +5,14 @@ body {
   background: #eee;
 }
 
-.line-series {
+.rv-xy-plot {
+  user-select: none !important; 
+}
+
+.line-series,
+.rv-xy-plot__series--line {
   stroke-width: 2;
-  fill: none;
+  fill: none !important;
 }
 
 .emissions-chart--regional {

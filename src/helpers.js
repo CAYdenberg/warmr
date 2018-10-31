@@ -7,16 +7,11 @@ export const isLastValue = (haystack, needle) => {
   return lastValue(haystack) === needle
 }
 
-export const fillInLinear = (startPoint, endPoint, spacing = 1) => {
-  const slope = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x)
-  let acc = [startPoint]
-  while (lastValue(acc).x < endPoint.x) {
-    acc = acc.concat({
-      x: lastValue(acc).x + spacing,
-      y: lastValue(acc).y + spacing * slope
-    })
-  }
-  return acc
+export const createLinearSeries = (startPoint, slope, numDatapoints) => {
+  return Array(numDatapoints + 1).fill(null).map((_, i) => {
+    const value = startPoint + slope * i
+    return (value > 0) ? value : 0
+  })
 }
 
 export const integrateData = series => {

@@ -31,16 +31,19 @@ class App extends React.Component {
       this.setState({
         loadState: 2,
         data: res,
-        projectedValues: res.map(series => lastValue(series.years1965to2017))
+        slopes: res.map(() => 0)
       })
     })
   }
 
   _updateProjection(series, deltaX, deltaY) {
-    this.setState({
-      projectedValues: this.state.projectedValues.map((value, i) =>
-        (series === i) ? value + deltaY * 100 : value
-      )
+    this.setState(state => {
+      return {
+        ...state,
+        slopes: state.slopes.map((value, i) =>
+          (series === i) ? value + 3 * deltaY : value
+        )
+      }
     })
   }
 
@@ -51,10 +54,10 @@ class App extends React.Component {
       <React.Fragment>
         <Emissions
           data={this.state.data}
-          projectedValues={this.state.projectedValues}
+          slopes={this.state.slopes}
           onSeriesDrag={this.updateProjection}
         />
-        <Warming data={this.state.data} projectedValues={this.state.projectedValues} />
+        {/* <Warming data={this.state.data} projectedValues={this.state.projectedValues} /> */}
       </React.Fragment>
     )
   }
