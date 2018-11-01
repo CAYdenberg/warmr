@@ -54,14 +54,14 @@ const Warming = props => {
       />
 
       <YAxis
-        title="Cumulative Emissions (billion tonnes CO2)"
+        title="Cumulative Emissions (billion tonnes CO&#8322;)"
         tickFormat={x => x / 1000}
         style={AXIS_STYLE}
       />
 
       <YAxis
         position="start"
-        title="Total warming (deg C)"
+        title="Total warming (&deg;C)"
         orientation="right"
         left={750}
         width={50}

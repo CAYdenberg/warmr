@@ -3,7 +3,7 @@ import React from 'react'
 import {SERIES_COLORS} from './constants'
 
 const SlopeForm = props =>
-  <form className="is-expanded">
+  <form className="is-expanded slope-form">
     {props.names.map((name, i) =>
       <div className="field" key={name}>
         <label className="label slope-form__label" style={{color: SERIES_COLORS[i]}}>

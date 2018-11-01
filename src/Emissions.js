@@ -107,7 +107,7 @@ class Emissions extends React.Component {
         />
 
         <YAxis
-          title="Emissions (billion tonnes CO2)"
+          title="Emissions (billion tonnes CO&#8322;)"
           style={AXIS_STYLE}
           tickFormat={x => x / 1000}
         />

@@ -58,23 +58,25 @@ class App extends React.Component {
   }
 
   render() {
-    if (!this.state.data) return null
+    if (!this.state.data) {
+      return <progress class="progress is-small is-primary" value="60" max="100">60%</progress>
+    }
 
     const names = this.state.data.map(series => series.name)
     const slopes = this.state.slopes
 
     return (
       <React.Fragment>
-        <div className="is-flex">
-          <Emissions
-            data={this.state.data}
-            slopes={this.state.slopes}
-            onSeriesDrag={this.updateProjection}
-          />
+        <div className="is-flex-tablet">
           <SlopeForm
             names={names}
             slopes={slopes}
             assignSlope={this.assignSlope}
+          />
+          <Emissions
+            data={this.state.data}
+            slopes={this.state.slopes}
+            onSeriesDrag={this.updateProjection}
           />
         </div>
 

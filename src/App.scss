@@ -1,8 +1,36 @@
 
+$primary: #003f5c;
+$info: #374c80;
+$success: #7a5195;
+$warning: #ffa600;
+$danger: #bc5090;
+
+$family-sans-serif: 'Open Sans', "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
 @import "../node_modules/bulma/bulma.sass";
 
-body {
-  background: #eee;
+.container {
+  @media (max-width: $tablet - 1) {
+    padding: 0 1rem;
+  }
+}
+
+.is-expanded {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.mar-md {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.slope-form {
+  order: 99;
+  &__label {
+    border-left: 1em solid;
+    padding-left: 0.6em;
+  }
 }
 
 .rv-xy-plot {
@@ -19,7 +47,9 @@ body {
   margin: 25px;
 }
 
-.is-expanded {
-  flex-grow: 1;
-  width: 100%;
+.app-loader {
+  font-size: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: $success;
 }

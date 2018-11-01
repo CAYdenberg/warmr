@@ -1,11 +1,43 @@
 <!doctype html>
 <html>
 <head>
+  <title>Warmr</title>
+  <meta name="description" content="Can you forecast global climate change by 2100?">
+
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
   <link rel="stylesheet" type="text/css" href="{{ css }}">
+
+  <meta name="og:title" content="Warmr">
+  <meta name="og:image" content="https://res.cloudinary.com/dfxksdivn/image/upload/v1541109516/screenshot-localhost-5000-2018.11.01-15-56-30_nmrchf.png">
+  <meta name="og:image:alt" content="Can you forecast global climate change by 2100?">
+  <meta name="og:url" content="/">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@CAYdenberg">
+  <meta name="twitter:title" content="Warmr">
+  <meta name="twitter:description" content=""Can you forecast global climate change by 2100?"">
+  <meta name="twitter:image" content="https://res.cloudinary.com/dfxksdivn/image/upload/v1541109516/screenshot-localhost-5000-2018.11.01-15-56-30_nmrchf.png">
+  <meta name="twitter:image:alt" content="Can you forecast global climate change by 2100?">
+
 </head>
 
 <body>
-  <div class="container">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="https://github.com/CAYdenberg/warmr">
+          GitHub
+        </a>
+
+        <a class="navbar-item" href="https://www.caseyy.org/">
+          by @CAYdenberg
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mar-md">
     <div class="content">
       <h1>Predicting the future of climate change</h1>
       <p>A curious feature of some climate models is that they predict a linear relationship between cumulative carbon emissions
@@ -13,7 +45,9 @@
     </div>
 
     <hr />
-    <div id="react-entry"></div>
+    <div id="react-entry">
+      <div class="loader app-loader"></div>
+    </div>
     <hr />
 
     <div class="content">
@@ -28,14 +62,15 @@
           <a href="http://dx.doi.org/10.1038/nature08047">
             Matthews et al (2009)
           </a>
-          to be about 1 degree celcius per 1 trillion tonnes carbon, or ~ 0.4 deg celcius per 1 trillion tonnes CO2. The 95% confidence interval for this estimate ranges from 0.2 - 0.6 degrees C, and these values are used to generate the endpoints of the red gradient.
+          to be about 1&deg;C per 1 trillion tonnes carbon, or ~ 0.4&deg;C per 1 trillion tonnes CO&#8322;. The 95% confidence interval for this estimate ranges from 0.2 - 0.6&deg;C, and these values are used to generate the endpoints of the red gradient.
         </li>
-        <li>This only takes into account global warming due to CO2, and not other greenhouse gasses.</li>
+        <li>This only takes into account global warming due to CO&#8322;, and not other greenhouse gasses.</li>
       </ol>
 
       <p>Questions? Comments? <a href="https://github.com/CAYdenberg/warmr/issues">Report on GitHub!</a></p>
     </div>
+  </div>
 
-    <script src="{{ js_entry }}"></script>
+  <script src="{{ js_entry }}"></script>
 </body>
 </html>
