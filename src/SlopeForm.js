@@ -18,7 +18,7 @@ const SlopeForm = props =>
             step="20"
             className="is-expanded"
             value={props.slopes[i]}
-            onChange={(e) => props.assignSlope(i, e.target.value)}
+            onChange={(e) => props.assignSlope(i, Number(e.target.value))}
           />
         </div>
       </div>
