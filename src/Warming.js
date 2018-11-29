@@ -32,8 +32,8 @@ const Warming = props => {
 
   return (
     <XYPlot
-      width={800}
-      height={600}
+      width={700}
+      height={500}
       xDomain={[1965, 2100]}
       margin={{left: 50, right: 50}}
     >
@@ -63,7 +63,7 @@ const Warming = props => {
         position="start"
         title="Total warming (&deg;C)"
         orientation="right"
-        left={750}
+        left={650}
         width={50}
         tickFormat={x => x / (2.5 * 10e5)}
         style={AXIS_STYLE}
