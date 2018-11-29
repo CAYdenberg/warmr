@@ -9,6 +9,7 @@ package-lock.json
 
 # production
 /app/static
+!/app/static/favicon.ico
 /.cache
 /v8-compile-cache*
 /app/static/*

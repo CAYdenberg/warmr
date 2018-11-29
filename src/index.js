@@ -59,7 +59,7 @@ class App extends React.Component {
 
   render() {
     if (!this.state.data) {
-      return <progress class="progress is-small is-primary" value="60" max="100">60%</progress>
+      return <progress className="progress is-small is-primary" value="60" max="100">60%</progress>
     }
 
     const names = this.state.data.map(series => series.name)
