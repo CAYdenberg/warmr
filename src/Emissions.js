@@ -17,7 +17,7 @@ class Emissions extends React.Component {
     super(props)
 
     this.state = {
-      selectedSeries: 0,
+      selectedSeries: null,
       xPos: null,
       yPos: null,
     }
