@@ -3,26 +3,20 @@ import React from 'react'
 import {SERIES_COLORS} from './constants'
 
 const SlopeForm = props =>
-  <form className="is-expanded slope-form">
+  <ul className="slope-form">
     {props.names.map((name, i) =>
-      <div className="field" key={name}>
-        <label className="label slope-form__label" style={{color: SERIES_COLORS[i]}}>
-          {name}
-        </label>
-
-        <div className="control">
-          <input
-            type="range"
-            min="-600"
-            max="600"
-            step="20"
-            className="is-expanded"
-            value={props.slopes[i]}
-            onChange={(e) => props.assignSlope(i, Number(e.target.value))}
-          />
+      <li className="slope-form__item" style={{color: SERIES_COLORS[i]}} key={name}>
+        <span className="slope-form__label">{name}</span>
+        <div className="field has-addons slope-form__controls">
+          <p className="control">
+            <button type="button" className="button is-small"> - </button>
+          </p>
+          <p className="control">
+            <button type="button" className="button is-small"> + </button>
+          </p>
         </div>
-      </div>
+      </li>
     )}
-  </form>
+  </ul>
 
 export default SlopeForm
