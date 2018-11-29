@@ -88,8 +88,8 @@ class Emissions extends React.Component {
 
     return (
       <XYPlot
-        width={600}
-        height={600}
+        width={500}
+        height={400}
         xDomain={[1965, 2050]}
         yDomain={[0, 24000]}
         className="emissions-chart--regional"

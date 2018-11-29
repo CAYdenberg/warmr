@@ -66,13 +66,14 @@ class App extends React.Component {
     const slopes = this.state.slopes
 
     return (
-      <React.Fragment>
-        <div className="is-flex-tablet">
+      <div className="app">
+        <div className="app__emissions-container">
           <SlopeForm
             names={names}
             slopes={slopes}
             assignSlope={this.assignSlope}
           />
+          <p className="is-size-6"><em>Click and drag the projections or use the controls above</em></p>
           <Emissions
             data={this.state.data}
             slopes={this.state.slopes}
@@ -84,7 +85,7 @@ class App extends React.Component {
           data={this.state.data}
           slopes={this.state.slopes}
         />
-      </React.Fragment>
+      </div>
     )
   }
 }
