@@ -1,7 +1,9 @@
-import numpy as np
-from pandas import Series, DataFrame
+import os
+from dotenv import load_dotenv
 import pandas as pd
 import pymongo
+
+load_dotenv()
 
 df = pd.read_csv('greenhouse.csv', header=0)
 
@@ -13,7 +15,7 @@ df = df.set_index('Country')
 columns = list(df.columns.values)
 df['years'] = df.apply(lambda row: tuple(row[c] for c in columns), axis=1)
 
-connection = pymongo.MongoClient('MONGO_DB')
+connection = pymongo.MongoClient(os.environ.get('MONGO_URI'))
 db = connection['warmr']
 
 for index, row in df.iterrows():
