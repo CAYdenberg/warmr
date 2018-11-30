@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import './App.scss'
 
 import {regions} from './api'
+import {DRAG_SENSITIVITY, INCREMENT_SENSITIVITY} from './constants'
 import SlopeForm from './SlopeForm'
 import Emissions from './Emissions'
 import Warming from './Warming'
@@ -13,12 +14,14 @@ class App extends React.Component {
 
     this.state = {
       data: null,
-      projectedValues: [],
+      slopes: [],
       loadState: 0,
     }
 
-    this.updateProjection = this._updateProjection.bind(this)
-    this.assignSlope = this._assignSlope.bind(this)
+    this.updateSlope = this._updateSlope.bind(this)
+    this.handleSeriesDrag = this._handleSeriesDrag.bind(this)
+    this.increment = this._increment.bind(this)
+    this.decrement = this._decrement.bind(this)
   }
 
   componentDidMount() {
@@ -35,26 +38,27 @@ class App extends React.Component {
     })
   }
 
-  _updateProjection(series, deltaX, deltaY) {
+  _updateSlope(series, change) {
     this.setState(state => {
       return {
         ...state,
         slopes: state.slopes.map((value, i) =>
-          (series === i) ? value + 3 * deltaY : value
+          (series === i) ? change(value) : value
         )
       }
     })
   }
 
-  _assignSlope(series, newSlope) {
-    this.setState(state => {
-      return {
-        ...state,
-        slopes: state.slopes.map((value, i) =>
-          (series === i) ? newSlope : value
-        )
-      }
-    })
+  _handleSeriesDrag(series, deltaX, deltaY) {
+    this.updateSlope(series, value => value + DRAG_SENSITIVITY * deltaY)
+  }
+
+  _increment(series) {
+    this.updateSlope(series, value => value + INCREMENT_SENSITIVITY)
+  }
+
+  _decrement(series) {
+    this.updateSlope(series, value => value - INCREMENT_SENSITIVITY)
   }
 
   render() {
@@ -71,13 +75,14 @@ class App extends React.Component {
           <SlopeForm
             names={names}
             slopes={slopes}
-            assignSlope={this.assignSlope}
+            decrement={this.decrement}
+            increment={this.increment}
           />
           <p className="is-size-6"><em>Click and drag the projections or use the controls above</em></p>
           <Emissions
             data={this.state.data}
             slopes={this.state.slopes}
-            onSeriesDrag={this.updateProjection}
+            onSeriesDrag={this.handleSeriesDrag}
           />
         </div>
 

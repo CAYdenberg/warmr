@@ -9,10 +9,10 @@ const SlopeForm = props =>
         <span className="slope-form__label">{name}</span>
         <div className="field has-addons slope-form__controls">
           <p className="control">
-            <button type="button" className="button is-small"> - </button>
+            <button type="button" className="button is-small" onClick={() => props.decrement(i)}> - </button>
           </p>
           <p className="control">
-            <button type="button" className="button is-small"> + </button>
+            <button type="button" className="button is-small" onClick={() => props.increment(i)}> + </button>
           </p>
         </div>
       </li>
