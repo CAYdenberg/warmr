@@ -14,3 +14,7 @@ export const SERIES_COLORS = [
   '#ff764a',
   '#ffa600'
 ]
+
+export const DRAG_SENSITIVITY = 3
+
+export const INCREMENT_SENSITIVITY = 25
